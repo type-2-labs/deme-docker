@@ -12,6 +12,7 @@ RUN python3 -m venv /opt/venv \
     && pip install --no-cache-dir "deme[cuda12]==${DEME_VERSION}" numpy \
     # v3 is released on PyPI but not tagged on GitHub; its demos live on main
     && git clone --depth 1 https://github.com/projectchrono/DEM-Engine.git /opt/DEM-Engine \
-    && python -c "import deme; print('deme OK')"
+    # importing deme needs libcuda (the host driver), which the build runner doesn't have
+    && python -c "import importlib.util, importlib.metadata as m; assert importlib.util.find_spec('deme'); print('deme', m.version('deme'))"
 
 WORKDIR /workspace
