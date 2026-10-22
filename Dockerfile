@@ -5,6 +5,7 @@ ARG DEME_VERSION=3.0.19
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \
         python3 python3-venv python3-dev git ca-certificates openssh-server rsync wget \
+        libx11-6 libxext6 \
     && rm -rf /var/lib/apt/lists/*
 
 ENV VIRTUAL_ENV=/opt/venv PATH=/opt/venv/bin:${PATH}
